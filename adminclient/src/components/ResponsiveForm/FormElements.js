@@ -652,7 +652,6 @@ export function getFormCode(options) {
       },
       lineWrapping:true,
       onChange: (!onValueChange) ? function (newvalue){
-        // console.log({ newvalue });
         newvalue = (formElement.stringify) ? JSON.parse(newvalue) : newvalue;
         let updatedStateProp = {};
         updatedStateProp[ formElement.name ] = newvalue;
@@ -684,7 +683,6 @@ export function getFormEditor(options) {
   let initialVal = getInitialValue(formElement, this.state);
   if (!onValueChange) {
     onValueChange = (newvalue) => {
-      // console.debug({ newvalue, });
       let updatedStateProp = {};
       updatedStateProp[ formElement.name ] = newvalue.target.value;
       this.setState(updatedStateProp);

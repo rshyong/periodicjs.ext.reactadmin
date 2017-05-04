@@ -64,7 +64,7 @@ const defaultProps = {
     size:'isSmall',
   },
   useToolbar:true,
-  showEditor:false,
+  showEditor:true,
 };
 
 class PreviewEditor extends Component {
@@ -159,8 +159,8 @@ class PreviewEditor extends Component {
       // date: new Date().toString(),
     };
     // console.debug('clicked toggler', 'codeState',codeState);
-    this.setState(codeState);
-    this.forceUpdate();
+    this.setState(codeState,  this.forceUpdate);
+    // this.forceUpdate();
 
   }
   emitChange() {
@@ -205,6 +205,8 @@ class PreviewEditor extends Component {
   }
   render() {
     // console.debug('---RENDER--- this.state.showEditor', this.state.showEditor);
+    console.log('rerendering');
+    // this.setState({showEditor: true});
     return (<div className="__ra_pe_w" {...this.props.wrapperProps}>
       <div className="__ra_pe_tb" {...this.props.toolbarProps}>
         {this.buttons.map((button, i) => {
@@ -245,6 +247,7 @@ class PreviewEditor extends Component {
               value: this.state.value,
               onChange: (value) => {
                 ReactDOM.findDOMNode(this).children[ this.contentIndex ].innerHTML = value;
+                this.props.onChange({target: {value: value}});
               },
             }}
           ></RACodeMirror>
