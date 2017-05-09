@@ -728,12 +728,17 @@ export function getFormSubmit(options) {
       ? 'isDisabled'
       : undefined,
   }, formElement.passProps);
+  // let formDataSubmit = this.state.formDataSubmit || {};
+  // formDataSubmit[ formElement.name ] = formElement.value;
   return (<FormItem key={i} {...formElement.layoutProps} >
     {getFormLabel(formElement)}  
     <Button {...passableProps}
       onClick={() => { 
-        let validated_formdata = validateForm.call(this, {formdata: this.state, validationErrors: {}});
-        this.setState({formDataErrors: validated_formdata.validationErrors}, () => {
+        let validated_formdata = validateForm.call(this, { formdata: this.state, validationErrors: {} });
+        let updatedStateProp = { formDataErrors: validated_formdata.validationErrors };
+        updatedStateProp[ 'formDataSubmit' ] = this.state.formDataSubmit || {};
+        updatedStateProp['formDataSubmit'][ formElement.name ] = formElement.value;  
+        this.setState(updatedStateProp, () => {
           (formElement.confirmModal && Object.keys(this.state.formDataErrors).length<1)
             ? this.props.createModal(Object.assign({
               title: 'Please Confirm',

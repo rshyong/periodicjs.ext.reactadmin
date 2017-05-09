@@ -78,7 +78,8 @@ class ResponsiveForm extends Component{
         __formDataStatusDate: new Date().toString(),
         formDataLists:{},
         formDataTables:{},
-        formDataFiles:{},
+        formDataFiles: {},
+        formDataSubmit: {},
       },
       // customProps.formdata,
       customPropsFormdata);
@@ -137,6 +138,7 @@ class ResponsiveForm extends Component{
     let state = this.props.getState();
     let headers = (state.settings.userprofile) ? state.settings.userprofile.options.headers : {};
     let formdata = Object.assign({}, this.state);
+    console.log('formdata', formdata);
     let validationErrors = {};
     let hiddenInputs = {};
     let submitFormData = {};
@@ -161,6 +163,7 @@ class ResponsiveForm extends Component{
     delete formdata.formDataLists;
     delete formdata.__formDataStatusDate;
     delete formdata.formDataTables;
+    delete formdata.formDataSubmit;
 
     let assigedHiddenFields = getAssigedHiddenField({ formdata, hiddenInputs, submitFormData, });
     hiddenInputs = assigedHiddenFields.hiddenInputs;
@@ -286,6 +289,7 @@ class ResponsiveForm extends Component{
       delete formdata.formDataStatusDate;
       delete formdata.formDataLists;
       delete formdata.formDataTables;
+      delete formdata.formDataSubmit;
       // console.warn('TODO:this should eventually use the same logic as submitform');
       if (typeof this.props.onChange === 'string' && this.props.onChange.indexOf('func:this.props') !== -1) {
         if (this.props.onChange === 'func:this.props.setDynamicData') {

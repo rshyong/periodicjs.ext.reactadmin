@@ -73,7 +73,15 @@ module.exports = {
                         {
                           type: 'submit',
                           value: 'update',
-                        },
+                        }, {
+                          name: 'submit1',
+                          type: 'submit',
+                          value: 'submitVal1'
+                        }, {
+                          name: 'submit2',
+                          type: 'submit',
+                          value: 'submitVal2'
+                        }
                       ],
                     },
                   ],
